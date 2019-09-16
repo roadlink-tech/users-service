@@ -1,0 +1,14 @@
+version: '2'
+services:
+  userdb:
+    image: mysql:latest
+    volumes:
+      - "./docker-volumes/.mysql-data/db:/var/lib/mysql"
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: userdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: admin
