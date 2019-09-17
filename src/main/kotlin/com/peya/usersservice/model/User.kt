@@ -4,6 +4,7 @@ import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType.IDENTITY
 import javax.persistence.Id
+import javax.validation.constraints.Email
 
 @Entity
 data class User(
@@ -12,5 +13,8 @@ data class User(
 
         val firstName: String = "",
 
-        val lastName: String = ""
+        val lastName: String = "",
+
+        @Email
+        val email: String = ""
 )

@@ -8,5 +8,11 @@ import org.springframework.stereotype.Service
 @Service
 class UserService(private val userRepository: UserRepository) {
 
-    fun getUser(id: Long): User = userRepository.findById(id).orElseThrow { throw ResourceNotFound("User $id does not exists.") }
+    fun getUser(id: Long): User {
+        return userRepository.findById(id).orElseThrow { throw ResourceNotFound("User $id does not exists.") }
+    }
+
+    fun createUser(user: User): User {
+        return userRepository.save(user)
+    }
 }

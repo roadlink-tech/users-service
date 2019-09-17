@@ -16,5 +16,7 @@ Before pushing, make sure that all tests pass and there are no code style errors
 ```
 $ mvn test
 ```
+## Architecture
+![alt_text](https://github.com/jorgejcabrera/users-service/blob/master/img/architecture.jpg)
 ## Contributors
 - Jorge Cabrera
