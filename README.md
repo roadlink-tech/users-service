@@ -1,7 +1,8 @@
 # User Service
+[![GitHub Issues](https://img.shields.io/github/issues/jorgejcabrera/users-service)](https://github.com/jorgejcabrera/users-service/issues)
 
 ## Requirements
-- [X] Java
+- [X] Kotlin - jdk11
 - [X] Maven
 - [X] Docker
 - [X] MySql
