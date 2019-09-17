@@ -1,14 +1,26 @@
-version: '2'
+version: '3'
 services:
+
+  #userservice:
+  #  build:
+  #    context: .
+  #  ports:
+  #    - 8080:8080
+  #  depends_on:
+  #    - userdb
+
   userdb:
     image: mysql:latest
     volumes:
       - "./docker-volumes/.mysql-data/db:/var/lib/mysql"
-    restart: always
-    ports:
-      - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: userdb
       MYSQL_USER: user
       MYSQL_PASSWORD: admin
+    ports:
+      - '3306:3306'
+      -
+networks:
+  default:
+    driver: custom-driver-1
