@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.RestController
 class UserController(private val userService: UserService) {
 
     @GetMapping("/{id}")
-    fun getUser(@PathVariable("id") id: Long): List<User> = userService.getAllUsers()
+    fun getUser(@PathVariable("id") id: Long): User = userService.getUser(id)
 
 }
