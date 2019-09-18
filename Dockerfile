@@ -5,15 +5,17 @@ MAINTAINER Author Name "cabrerajjorge@gmail.com"
 # copy pom.xml
 COPY ./pom.xml ./pom.xml
 
-# build all dependencies for offline use
+# build all the dependencies in preparation to go offline.
+# This is a separate step so the dependencies will be cached unless
+# the pom.xml file has changed.
 RUN mvn dependency:go-offline -B
 
 # copy your source tree
 COPY ./src ./src
 
-# build for release
+# build for release and set the startup command to run your binary
 RUN mvn package
 
-# set the startup command to run your binary
-ENTRYPOINT ["java", "-jar", "./target/users-service*.jar"]
+ENTRYPOINT [ "sh", "-c", "java -jar -Duser.timezone=$TIMEZONE -XX:+UseG1GC -Xms256m -Xmx2048m -XX:PermSize=2048m -XX:MaxPermSize=2048m -Xss1m /target/*SNAPSHOT.jar" ]
+
 EXPOSE 8080
