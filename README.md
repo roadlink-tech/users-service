@@ -18,5 +18,10 @@ $ mvn test
 ```
 ## Architecture
 ![alt_text](https://github.com/jorgejcabrera/users-service/blob/master/img/architecture.jpg)
+## Documentation
+When server is running visit
+```
+http://localhost:8080/swagger-ui.html#/
+```
 ## Contributors
 - Jorge Cabrera
