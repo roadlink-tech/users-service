@@ -16,6 +16,6 @@ COPY ./src ./src
 # build for release and set the startup command to run your binary
 RUN mvn package
 
-ENTRYPOINT [ "sh", "-c", "java -jar -Duser.timezone=$TIMEZONE -XX:+UseG1GC -Xms256m -Xmx2048m -XX:PermSize=2048m -XX:MaxPermSize=2048m -Xss1m /target/*SNAPSHOT.jar" ]
+ENTRYPOINT [ "sh", "-c", "java -jar -Dspring.profiles.active=prod -Duser.timezone=$TIMEZONE -XX:+UseG1GC -Xms256m -Xmx2048m -XX:PermSize=2048m -XX:MaxPermSize=2048m -Xss1m /target/*SNAPSHOT.jar" ]
 
 EXPOSE 8080

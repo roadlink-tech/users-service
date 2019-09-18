@@ -1,5 +1,6 @@
 package com.peya.usersservice.service
 
+import com.peya.usersservice.dto.UserDto
 import com.peya.usersservice.exception.ResourceNotFound
 import com.peya.usersservice.model.User
 import com.peya.usersservice.repository.UserRepository
@@ -12,7 +13,7 @@ class UserService(private val userRepository: UserRepository) {
         return userRepository.findById(id).orElseThrow { throw ResourceNotFound("User $id does not exists.") }
     }
 
-    fun createUser(user: User): User {
-        return userRepository.save(user)
+    fun createUser(user: UserDto): User {
+        return userRepository.save(user.toUser())
     }
 }
