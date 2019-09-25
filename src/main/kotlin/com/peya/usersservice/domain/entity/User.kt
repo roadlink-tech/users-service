@@ -1,4 +1,4 @@
-package com.peya.usersservice.model
+package com.peya.usersservice.domain.entity
 
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate

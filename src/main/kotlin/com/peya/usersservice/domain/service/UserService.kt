@@ -1,9 +1,9 @@
-package com.peya.usersservice.service
+package com.peya.usersservice.domain.service
 
-import com.peya.usersservice.dto.UserDto
-import com.peya.usersservice.exception.ResourceNotFound
-import com.peya.usersservice.model.User
-import com.peya.usersservice.repository.UserRepository
+import com.peya.usersservice.domain.dto.UserDto
+import com.peya.usersservice.domain.exception.ResourceNotFound
+import com.peya.usersservice.domain.entity.User
+import com.peya.usersservice.domain.repository.UserRepository
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 

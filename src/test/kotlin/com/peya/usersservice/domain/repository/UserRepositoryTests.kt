@@ -1,7 +1,7 @@
-package com.peya.usersservice.repository
+package com.peya.usersservice.domain.repository
 
-import com.peya.usersservice.dto.UserDto
-import com.peya.usersservice.model.User
+import com.peya.usersservice.domain.dto.UserDto
+import com.peya.usersservice.domain.entity.User
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
