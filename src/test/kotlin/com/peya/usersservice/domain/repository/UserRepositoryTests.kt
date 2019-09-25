@@ -1,6 +1,6 @@
 package com.peya.usersservice.domain.repository
 
-import com.peya.usersservice.domain.dto.UserDto
+import com.peya.usersservice.application.dto.UserDto
 import com.peya.usersservice.domain.entity.User
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test

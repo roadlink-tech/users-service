@@ -1,4 +1,4 @@
-package com.peya.usersservice.domain.dto
+package com.peya.usersservice.application.dto
 
 import com.peya.usersservice.domain.entity.User
 import javax.validation.constraints.Email

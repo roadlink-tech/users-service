@@ -1,6 +1,6 @@
 package com.peya.usersservice.application.controller
 
-import com.peya.usersservice.domain.dto.UserDto
+import com.peya.usersservice.application.dto.UserDto
 import com.peya.usersservice.domain.entity.User
 import com.peya.usersservice.domain.service.UserService
 import io.swagger.annotations.Api

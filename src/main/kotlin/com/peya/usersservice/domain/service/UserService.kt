@@ -1,6 +1,6 @@
 package com.peya.usersservice.domain.service
 
-import com.peya.usersservice.domain.dto.UserDto
+import com.peya.usersservice.application.dto.UserDto
 import com.peya.usersservice.domain.exception.ResourceNotFound
 import com.peya.usersservice.domain.entity.User
 import com.peya.usersservice.domain.repository.UserRepository

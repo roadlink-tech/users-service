@@ -1,6 +1,6 @@
 package com.peya.usersservice.domain.service
 
-import com.peya.usersservice.domain.dto.UserDto
+import com.peya.usersservice.application.dto.UserDto
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
