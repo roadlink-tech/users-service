@@ -1,4 +1,4 @@
-package com.peya.usersservice.controller
+package com.peya.usersservice.application.controller
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test

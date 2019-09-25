@@ -1,6 +1,6 @@
-package com.peya.usersservice.dto
+package com.peya.usersservice.domain.dto
 
-import com.peya.usersservice.model.User
+import com.peya.usersservice.domain.entity.User
 import javax.validation.constraints.Email
 
 class UserDto(

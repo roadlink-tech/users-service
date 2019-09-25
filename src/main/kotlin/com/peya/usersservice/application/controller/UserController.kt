@@ -1,8 +1,8 @@
-package com.peya.usersservice.controller
+package com.peya.usersservice.application.controller
 
-import com.peya.usersservice.dto.UserDto
-import com.peya.usersservice.model.User
-import com.peya.usersservice.service.UserService
+import com.peya.usersservice.domain.dto.UserDto
+import com.peya.usersservice.domain.entity.User
+import com.peya.usersservice.domain.service.UserService
 import io.swagger.annotations.Api
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
