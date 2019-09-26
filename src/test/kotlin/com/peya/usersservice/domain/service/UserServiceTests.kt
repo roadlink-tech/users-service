@@ -13,7 +13,7 @@ class UserServiceTest {
 
     @Test
     fun `when create user with invalid email should fail`() {
-        val userDto = UserDto(firstName = "jorge",lastName = "cabrera")
+        val userDto = UserDto(firstName = "jorge", lastName = "cabrera")
         userService.createUser(userDto)
     }
 }
