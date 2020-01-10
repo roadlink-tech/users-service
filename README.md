@@ -8,6 +8,11 @@
 - [X] MySql
 
 ## Developing application locally
+First at all you must build user-service application with:
+```
+$ docker-compose build
+```
+and then
 ```
 $ docker-compose up
 ```
