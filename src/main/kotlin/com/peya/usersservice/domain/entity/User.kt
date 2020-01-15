@@ -14,18 +14,13 @@ import javax.validation.constraints.Email
 data class User(
         @Id @GeneratedValue(strategy = IDENTITY)
         val id: Long = 0,
-
-        val firstName: String = "",
-
-        val lastName: String = "",
-
+        var firstName: String = "",
+        var lastName: String = "",
         @Email
         val email: String = "",
-
         @CreatedDate
         @Column(name = "created_date", nullable = false, updatable = false)
         var createdDate: LocalDateTime? = null,
-
         @LastModifiedDate
         @Column(name = "last_modified_date", nullable = false)
         var lastModifiedDate: LocalDateTime? = null

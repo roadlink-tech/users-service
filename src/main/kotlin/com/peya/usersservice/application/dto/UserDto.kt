@@ -3,11 +3,9 @@ package com.peya.usersservice.application.dto
 import com.peya.usersservice.domain.entity.User
 import javax.validation.constraints.Email
 
-class UserDto(
+data class UserDto(
         val firstName: String = "",
-
         val lastName: String = "",
-        
         @Email
         val email: String = "") {
 
