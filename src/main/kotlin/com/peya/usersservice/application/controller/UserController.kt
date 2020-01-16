@@ -5,8 +5,17 @@ import com.peya.usersservice.domain.entity.User
 import com.peya.usersservice.domain.service.UserService
 import io.swagger.annotations.Api
 import org.springframework.http.HttpStatus
-import org.springframework.http.HttpStatus.*
-import org.springframework.web.bind.annotation.*
+import org.springframework.http.HttpStatus.CREATED
+import org.springframework.http.HttpStatus.OK
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.ResponseStatus
+import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
 
 @Api(description = "General purpose operations")
@@ -30,6 +39,12 @@ class UserController(private val userService: UserService) {
     @ResponseStatus(OK)
     fun update(@Valid @RequestBody user: UserDto, @PathVariable("id") id: Long): User {
         return userService.update(id, user)
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    fun delete(@PathVariable("id") id: Long) {
+        return userService.delete(id)
     }
 
 }
