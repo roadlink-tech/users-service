@@ -1,19 +1,148 @@
 package com.peya.usersservice.domain.service
 
 import com.peya.usersservice.application.dto.UserDto
-import org.junit.jupiter.api.Test
+import com.peya.usersservice.domain.entity.User
+import com.peya.usersservice.domain.enums.UserStatus.ACTIVE
+import com.peya.usersservice.domain.exception.ResourceNotFound
+import com.peya.usersservice.domain.repository.UserRepository
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.junit4.SpringRunner
+import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
+import kotlin.test.assertNotNull
 
+
+@RunWith(SpringRunner::class)
 @SpringBootTest
 class UserServiceTest {
 
     @Autowired
+    private lateinit var userRepository: UserRepository
+    @Autowired
     private lateinit var userService: UserService
 
+    @Before
+    fun clear() {
+        userRepository.deleteAll()
+    }
+
+
     @Test
-    fun `when create user with invalid email should fail`() {
-        val userDto = UserDto(firstName = "jorge",lastName = "cabrera")
-        userService.create(userDto)
+    fun `service throw and exception when try to get an user that not exists`() {
+        val userId = anyUserId()
+
+        val exception = assertFailsWith<ResourceNotFound>{
+            userService.get(userId)
+        }
+        assertEquals("User $userId does not exists.", exception.message)
+    }
+
+    @Test
+    fun `service can get an user`() {
+        val saved = anySavedUser()
+
+        val user = userService.get(saved.id)
+        assertEquals(saved, user)
+    }
+
+    @Test
+    fun `service can create an user`() {
+        val userDto = anyUserDto()
+        val created = userService.create(userDto)
+
+        val saved = userService.get(created.id)
+        assertEquals(saved.firstName, userDto.firstName)
+        assertEquals(saved.lastName, userDto.lastName)
+        assertEquals(saved.email, userDto.email)
+        assertNotNull(saved.id)
+        assertNotNull(saved.lastModifiedDate)
+        assertNotNull(saved.createdDate)
+        assertEquals(saved.status, ACTIVE)
+    }
+
+    @Test
+    fun `service can not get a deleted user`() {
+        val savedId = anySavedUser().id
+        userService.delete(savedId)
+
+        val exception = assertFailsWith<ResourceNotFound>{
+            userService.get(savedId)
+        }
+        assertEquals("User $savedId does not exists.", exception.message)
+    }
+
+    @Test
+    fun `service only get actives users`() {
+        val active = anySavedUser()
+        val deleted = anySavedUser()
+        userService.delete(deleted.id)
+
+        val exception = assertFailsWith<ResourceNotFound>{
+            userService.get(deleted.id)
+        }
+        assertEquals("User ${deleted.id} does not exists.", exception.message)
+
+        val user = userService.get(active.id)
+        assertEquals(active, user)
+    }
+
+    @Test
+    fun `service throw an exception when trying to delete an user that not exists`() {
+        val userId = anyUserId()
+
+        val exception = assertFailsWith<ResourceNotFound> {
+            userService.delete(userId)
+        }
+        assertEquals("User $userId does not exists.", exception.message)
+    }
+
+    @Test
+    fun `service throw an exception when trying to update an user that not exists`() {
+        val userId = anyUserId()
+        val userDto = anyUserDto()
+
+        val exception = assertFailsWith<ResourceNotFound> {
+            userService.update(userId, userDto)
+        }
+        assertEquals("User $userId does not exists.", exception.message)
+    }
+
+    @Test
+    fun `service can update an user`() {
+        val saved = anySavedUser()
+
+        val newFirstName = "newFirstName"
+        val newLastName = "newLastName"
+        val newEmail = "newemail@test.com"
+        val newUserDto = UserDto(firstName = newFirstName, lastName = newLastName, email = newEmail)
+        userService.update(saved.id, newUserDto)
+        val updated = userService.get(saved.id)
+
+        assertEquals(updated.id, saved.id)
+        assertEquals(updated.firstName, newFirstName)
+        assertEquals(updated.lastName, updated.lastName)
+        assertEquals(updated.email, updated.email)
+        assertEquals(updated.status, ACTIVE)
+        assertEquals(updated.createdDate, saved.createdDate)
+        assert(updated.lastModifiedDate!! > saved.lastModifiedDate)
+    }
+
+
+    private fun anyUserId(): Long = 1
+    private fun anyString(): String = "anyString"
+    private fun anyEmail(): String = "user@test.com"
+    private fun anyUserDto(): UserDto {
+        val firstName = anyString()
+        val lastName = anyString()
+        val email = anyString()
+        return UserDto(firstName = firstName, lastName = lastName, email = email)
+    }
+    private fun anySavedUser(): User {
+        val user = User(firstName = anyString(), lastName = anyString(), email = anyEmail(), status = ACTIVE)
+        return userRepository.save(user)
     }
 }

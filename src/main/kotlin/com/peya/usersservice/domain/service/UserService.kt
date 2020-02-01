@@ -6,6 +6,7 @@ import com.peya.usersservice.domain.entity.User
 import com.peya.usersservice.domain.exception.ResourceNotFound
 import com.peya.usersservice.domain.repository.UserRepository
 import org.slf4j.LoggerFactory
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 
 @Service
@@ -35,6 +36,7 @@ class UserService(private val userRepository: UserRepository) {
         try {
             user.firstName = userDto.firstName
             user.lastName = userDto.lastName
+            user.email = userDto.email
             return userRepository.save(user)
         } catch (ex: Exception) {
             logger.error("It was an error while trying to update user ${user.id}. Error: ${ex.message}")

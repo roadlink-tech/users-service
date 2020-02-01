@@ -20,7 +20,7 @@ import javax.validation.constraints.Email
 @Entity
 @Table(name = "user")
 @EntityListeners(AuditingEntityListener::class)
-class User(
+data class User(
         @Id @GeneratedValue(strategy = IDENTITY)
         val id: Long = 0,
         var firstName: String = "",
@@ -36,10 +36,6 @@ class User(
         @Column(name = "last_modified_date", nullable = false)
         var lastModifiedDate: LocalDateTime? = null
 ) {
-    fun isNotDeleted(): Boolean {
-        return status != DELETED
-    }
-
     fun delete() {
         this.status = DELETED
     }
