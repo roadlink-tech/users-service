@@ -3,7 +3,7 @@ package com.peya.usersservice.domain.service
 import com.peya.usersservice.application.dto.UserDto
 import com.peya.usersservice.domain.entity.User
 import com.peya.usersservice.domain.enums.UserStatus.ACTIVE
-import com.peya.usersservice.domain.exception.ResourceNotFound
+import com.peya.usersservice.domain.exception.UserNotFound
 import com.peya.usersservice.domain.repository.UserRepository
 import org.junit.Before
 import org.junit.Test
@@ -35,10 +35,9 @@ class UserServiceTest {
     fun `service throw and exception when try to get an user that not exists`() {
         val userId = anyUserId()
 
-        val exception = assertFailsWith<ResourceNotFound>{
+        val exception = assertFailsWith<UserNotFound>{
             userService.get(userId)
         }
-        assertEquals("User $userId does not exists.", exception.message)
     }
 
     @Test
@@ -69,10 +68,9 @@ class UserServiceTest {
         val savedId = anySavedUser().id
         userService.delete(savedId)
 
-        val exception = assertFailsWith<ResourceNotFound>{
+        val exception = assertFailsWith<UserNotFound>{
             userService.get(savedId)
         }
-        assertEquals("User $savedId does not exists.", exception.message)
     }
 
     @Test
@@ -81,11 +79,9 @@ class UserServiceTest {
         val deleted = anySavedUser()
         userService.delete(deleted.id)
 
-        val exception = assertFailsWith<ResourceNotFound>{
+        val exception = assertFailsWith<UserNotFound>{
             userService.get(deleted.id)
         }
-        assertEquals("User ${deleted.id} does not exists.", exception.message)
-
         val user = userService.get(active.id)
         assertEquals(active, user)
     }
@@ -94,10 +90,9 @@ class UserServiceTest {
     fun `service throw an exception when trying to delete an user that not exists`() {
         val userId = anyUserId()
 
-        val exception = assertFailsWith<ResourceNotFound> {
+        val exception = assertFailsWith<UserNotFound> {
             userService.delete(userId)
         }
-        assertEquals("User $userId does not exists.", exception.message)
     }
 
     @Test
@@ -105,10 +100,9 @@ class UserServiceTest {
         val userId = anyUserId()
         val userDto = anyUserDto()
 
-        val exception = assertFailsWith<ResourceNotFound> {
+        val exception = assertFailsWith<UserNotFound> {
             userService.update(userId, userDto)
         }
-        assertEquals("User $userId does not exists.", exception.message)
     }
 
     @Test

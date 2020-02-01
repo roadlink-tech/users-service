@@ -3,10 +3,9 @@ package com.peya.usersservice.domain.service
 import com.peya.usersservice.application.dto.UserDto
 import com.peya.usersservice.domain.builder.UserBuilder
 import com.peya.usersservice.domain.entity.User
-import com.peya.usersservice.domain.exception.ResourceNotFound
+import com.peya.usersservice.domain.exception.UserNotFound
 import com.peya.usersservice.domain.repository.UserRepository
 import org.slf4j.LoggerFactory
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 
 @Service
@@ -18,7 +17,7 @@ class UserService(private val userRepository: UserRepository) {
     }
 
     fun get(id: Long): User {
-        return userRepository.findById(id) ?: throw ResourceNotFound("User $id does not exists.")
+        return userRepository.findById(id) ?: throw UserNotFound()
     }
 
     fun create(dto: UserDto): User {

@@ -3,8 +3,6 @@ package com.peya.usersservice.application.controller
 import com.peya.usersservice.application.dto.UserDto
 import com.peya.usersservice.domain.builder.UserBuilder
 import com.peya.usersservice.domain.entity.User
-import com.peya.usersservice.domain.enums.UserStatus
-import com.peya.usersservice.domain.enums.UserStatus.*
 import com.peya.usersservice.domain.repository.UserRepository
 import org.junit.Before
 import org.junit.Test
@@ -19,7 +17,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delet
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
@@ -28,7 +25,7 @@ const val userIdNotExisting = 1L
 @RunWith(SpringRunner::class)
 @SpringBootTest
 @AutoConfigureMockMvc
-class UserIntegrationTests {
+class UserFunctionalTests {
 
     @Autowired
     private lateinit var mockMvc: MockMvc
