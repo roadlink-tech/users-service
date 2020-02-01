@@ -18,7 +18,7 @@ class UserService(private val userRepository: UserRepository) {
     }
 
     fun get(id: Long): User {
-        return userRepository.findByIdOrNull(id) ?: throw ResourceNotFound("User $id does not exists.")
+        return userRepository.findById(id) ?: throw ResourceNotFound("User $id does not exists.")
     }
 
     fun create(dto: UserDto): User {

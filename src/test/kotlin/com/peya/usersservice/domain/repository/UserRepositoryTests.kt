@@ -15,25 +15,25 @@ class UserRepositoryTests @Autowired constructor(
         val entityManager: TestEntityManager,
         val userRepository: UserRepository
 ) {
-/*
+
     @Test
     fun `when findById then should return valid user`() {
         val user = User(firstName = "jorge", lastName = "cabrera")
         entityManager.persist(user)
         entityManager.flush()
-        val found = userRepository.findById(user.id).get()
+        val found = userRepository.findById(user.id)
         assertThat(found).isNotNull
-        assertThat(found.createdDate).isNotNull()
-        assertThat(found.lastModifiedDate).isNotNull()
+        assertThat(found?.createdDate).isNotNull()
+        assertThat(found?.lastModifiedDate).isNotNull()
     }
 
     @Test
     fun `when save userDto as user then should work ok`() {
         val userDto = UserDto(firstName = "jorge",lastName = "cabrera")
         val saveUser = entityManager.persistAndFlush(userDto.toUser())
-        val found = userRepository.findById(saveUser.id).get()
+        val found = userRepository.findById(saveUser.id)
         assertThat(found).isNotNull
-        assertThat(found.createdDate).isNotNull()
-        assertThat(found.lastModifiedDate).isNotNull()
-    }*/
+        assertThat(found?.createdDate).isNotNull()
+        assertThat(found?.lastModifiedDate).isNotNull()
+    }
 }

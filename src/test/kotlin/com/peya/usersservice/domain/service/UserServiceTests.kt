@@ -22,7 +22,6 @@ class UserServiceTest {
 
     @Autowired
     private lateinit var userRepository: UserRepository
-
     @Autowired
     private lateinit var userService: UserService
 
