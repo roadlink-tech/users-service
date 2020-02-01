@@ -12,3 +12,14 @@ services:
       MYSQL_DATABASE: userdb
       MYSQL_USER: user
       MYSQL_PASSWORD: admin
+
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - db
