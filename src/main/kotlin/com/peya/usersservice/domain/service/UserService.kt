@@ -6,6 +6,7 @@ import com.peya.usersservice.domain.entity.User
 import com.peya.usersservice.domain.exception.ResourceNotFound
 import com.peya.usersservice.domain.repository.UserRepository
 import org.slf4j.LoggerFactory
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 
 @Service
@@ -17,7 +18,7 @@ class UserService(private val userRepository: UserRepository) {
     }
 
     fun get(id: Long): User {
-        return userRepository.find(id).orElseThrow { throw ResourceNotFound("User $id does not exists.") }
+        return userRepository.findByIdOrNull(id) ?: throw ResourceNotFound("User $id does not exists.")
     }
 
     fun create(dto: UserDto): User {
@@ -30,12 +31,12 @@ class UserService(private val userRepository: UserRepository) {
         }
     }
 
-
     fun update(id: Long, userDto: UserDto): User {
         val user: User = this.get(id)
         try {
             user.firstName = userDto.firstName
             user.lastName = userDto.lastName
+            user.email = userDto.email
             return userRepository.save(user)
         } catch (ex: Exception) {
             logger.error("It was an error while trying to update user ${user.id}. Error: ${ex.message}")

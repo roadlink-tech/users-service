@@ -20,8 +20,12 @@ import javax.validation.Valid
 
 @Api(description = "General purpose operations")
 @RestController
-@RequestMapping("/users")
+@RequestMapping(value = [UserController.path])
 class UserController(private val userService: UserService) {
+
+    companion object {
+        const val path = "users"
+    }
 
     @GetMapping("/{id}")
     @ResponseStatus(OK)
