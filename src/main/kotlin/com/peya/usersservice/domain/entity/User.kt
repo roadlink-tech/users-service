@@ -5,6 +5,7 @@ import com.peya.usersservice.domain.enums.UserStatus.DELETED
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
+import org.springframework.format.annotation.NumberFormat
 import java.time.LocalDateTime
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -16,6 +17,7 @@ import javax.persistence.GenerationType.IDENTITY
 import javax.persistence.Id
 import javax.persistence.Table
 import javax.validation.constraints.Email
+import javax.validation.constraints.Pattern
 
 @Entity
 @Table(name = "user")
@@ -25,8 +27,8 @@ data class User(
         val id: Long = 0,
         var firstName: String = "",
         var lastName: String = "",
-        @Email
         var email: String = "",
+        var phone: String = "",
         @Enumerated(EnumType.STRING)
         var status: UserStatus? = null,
         @CreatedDate
