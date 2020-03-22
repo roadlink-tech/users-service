@@ -46,7 +46,7 @@ class UserController(private val userService: UserService) {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(OK)
     fun delete(@PathVariable("id") id: Long) {
         return userService.delete(id)
     }

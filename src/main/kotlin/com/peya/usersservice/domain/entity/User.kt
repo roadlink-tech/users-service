@@ -27,7 +27,6 @@ data class User(
         val id: Long = 0,
         var firstName: String = "",
         var lastName: String = "",
-        @Email
         var email: String = "",
         var phone: String = "",
         @Enumerated(EnumType.STRING)

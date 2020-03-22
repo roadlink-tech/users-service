@@ -32,10 +32,10 @@ class UserServiceTest {
 
 
     @Test
-    fun `service throw and exception when try to get an user that not exists`() {
+    fun `service should throw and exception when try to get a user that not exists`() {
         val userId = anyUserId()
 
-        val exception = assertFailsWith<UserNotFound>{
+        assertFailsWith<UserNotFound>{
             userService.get(userId)
         }
     }
@@ -68,7 +68,7 @@ class UserServiceTest {
         val savedId = anySavedUser().id
         userService.delete(savedId)
 
-        val exception = assertFailsWith<UserNotFound>{
+        assertFailsWith<UserNotFound>{
             userService.get(savedId)
         }
     }
@@ -79,7 +79,7 @@ class UserServiceTest {
         val deleted = anySavedUser()
         userService.delete(deleted.id)
 
-        val exception = assertFailsWith<UserNotFound>{
+        assertFailsWith<UserNotFound>{
             userService.get(deleted.id)
         }
         val user = userService.get(active.id)
@@ -90,7 +90,7 @@ class UserServiceTest {
     fun `service throw an exception when trying to delete an user that not exists`() {
         val userId = anyUserId()
 
-        val exception = assertFailsWith<UserNotFound> {
+        assertFailsWith<UserNotFound> {
             userService.delete(userId)
         }
     }
@@ -100,7 +100,7 @@ class UserServiceTest {
         val userId = anyUserId()
         val userDto = anyUserDto()
 
-        val exception = assertFailsWith<UserNotFound> {
+        assertFailsWith<UserNotFound> {
             userService.update(userId, userDto)
         }
     }
