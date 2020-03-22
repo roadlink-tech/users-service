@@ -45,9 +45,8 @@ class UserFunctionalTests {
     @Test
     fun `when body is valid then can create a user`() {
         mockMvc.perform(post("/${UserController.path}")
-                .content("""{ "first_name":"foo", "last_name":"bar", "email":"foo@email.com" }""".trimMargin())
-                .contentType(APPLICATION_JSON)
-                .accept(APPLICATION_JSON))
+                .content("""{ "first_name":"foo", "last_name":"bar", "email":"foo@email.com", "phone":"123" }""".trimMargin())
+                .contentType(APPLICATION_JSON))
                 .andExpect(status().isCreated)
                 .andExpect(jsonPath("id").exists())
                 .andExpect(jsonPath("first_name").value("foo"))
@@ -59,11 +58,10 @@ class UserFunctionalTests {
     }
 
     @Test
-    fun `when body is invalid then should throw bad request exception`() {
+    fun `when email is invalid then should throw bad request exception`() {
         mockMvc.perform(post("/${UserController.path}")
-                .content("""{ "first_name:"foo", "last_name":"bar", "email":"foo" }""".trimMargin())
-                .contentType(APPLICATION_JSON)
-                .accept(APPLICATION_JSON))
+                .content("""{ "first_name:"foo", "last_name":"bar", "email":"foo", "phone": "123" }""".trimMargin())
+                .contentType(APPLICATION_JSON))
                 .andExpect(status().isBadRequest)
     }
 
@@ -75,26 +73,36 @@ class UserFunctionalTests {
 
     @Test
     fun `when change user name then should change it ok`() {
-        // given
         val user = createAnyActiveUser()
 
-        // when
         mockMvc.perform(put("/${UserController.path}/${user.id}")
                 .content("""{ "first_name":"jorge" }""".trimMargin())
-                .contentType(APPLICATION_JSON)
-                .accept(APPLICATION_JSON))
+                .contentType(APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful)
 
-
-        // then
         mockMvc.perform(get("/${UserController.path}/${user.id}"))
                 .andExpect(jsonPath("first_name").value("jorge"))
                 .andExpect(status().is2xxSuccessful)
 
     }
 
+    @Test
+    fun `phone is required for create a user`() {
+        mockMvc.perform(post("/${UserController.path}")
+                .content("""{ "first_name":"foo", "last_name":"bar", "email":"foo@email.com" }""".trimMargin())
+                .contentType(APPLICATION_JSON)).andExpect(status().isBadRequest)
+    }
+
+    @Test
+    fun `phone must be valid for create a user`() {
+        mockMvc.perform(post("/${UserController.path}")
+                .content("""{ "first_name":"foo", "last_name":"bar", "email":"foo@email.com", "phone": "aa" }""".trimMargin())
+                .contentType(APPLICATION_JSON)).andExpect(status().isBadRequest)
+    }
+
+
     private fun createAnyActiveUser(): User {
-        val user = UserBuilder().withUserDto(UserDto(firstName = "Martin", email = "martin.bosch@gmail.com", lastName = "bosch")).build()
+        val user = UserBuilder().withUserDto(UserDto(firstName = "Martin", email = "martin.bosch@gmail.com", lastName = "bosch", phone = "123")).build()
         return userRepository.save(user)
     }
 }

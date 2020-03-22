@@ -112,7 +112,8 @@ class UserServiceTest {
         val newFirstName = "newFirstName"
         val newLastName = "newLastName"
         val newEmail = "newemail@test.com"
-        val newUserDto = UserDto(firstName = newFirstName, lastName = newLastName, email = newEmail)
+        val newPhone = "newPhone"
+        val newUserDto = UserDto(firstName = newFirstName, lastName = newLastName, email = newEmail, phone = newPhone)
         userService.update(saved.id, newUserDto)
         val updated = userService.get(saved.id)
 
@@ -133,7 +134,8 @@ class UserServiceTest {
         val firstName = anyString()
         val lastName = anyString()
         val email = anyString()
-        return UserDto(firstName = firstName, lastName = lastName, email = email)
+        val phone = anyString()
+        return UserDto(firstName = firstName, lastName = lastName, email = email, phone = phone)
     }
     private fun anySavedUser(): User {
         val user = User(firstName = anyString(), lastName = anyString(), email = anyEmail(), status = ACTIVE)
