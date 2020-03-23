@@ -4,12 +4,14 @@ import com.peya.usersservice.application.dto.UserDto
 import com.peya.usersservice.domain.entity.User
 import com.peya.usersservice.domain.enums.UserStatus.ACTIVE
 import com.peya.usersservice.domain.exception.UserNotFound
+import com.peya.usersservice.domain.repository.AuthRepository
 import com.peya.usersservice.domain.repository.UserRepository
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.context.junit4.SpringRunner
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -24,6 +26,8 @@ class UserServiceTest {
     private lateinit var userRepository: UserRepository
     @Autowired
     private lateinit var userService: UserService
+    @MockBean
+    private lateinit var authRepository: AuthRepository
 
     @Before
     fun clear() {
@@ -113,7 +117,7 @@ class UserServiceTest {
         val newLastName = "newLastName"
         val newEmail = "newemail@test.com"
         val newPhone = "newPhone"
-        val newUserDto = UserDto(firstName = newFirstName, lastName = newLastName, email = newEmail, phone = newPhone)
+        val newUserDto = UserDto(firstName = newFirstName, lastName = newLastName, email = newEmail, phone = newPhone, password = "asdas")
         userService.update(saved.id, newUserDto)
         val updated = userService.get(saved.id)
 
@@ -135,7 +139,7 @@ class UserServiceTest {
         val lastName = anyString()
         val email = anyString()
         val phone = anyString()
-        return UserDto(firstName = firstName, lastName = lastName, email = email, phone = phone)
+        return UserDto(firstName = firstName, lastName = lastName, email = email, phone = phone, password = "asdas")
     }
     private fun anySavedUser(): User {
         val user = User(firstName = anyString(), lastName = anyString(), email = anyEmail(), status = ACTIVE)

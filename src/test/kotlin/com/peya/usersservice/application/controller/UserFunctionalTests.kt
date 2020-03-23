@@ -3,6 +3,7 @@ package com.peya.usersservice.application.controller
 import com.peya.usersservice.application.dto.UserDto
 import com.peya.usersservice.domain.builder.UserBuilder
 import com.peya.usersservice.domain.entity.User
+import com.peya.usersservice.domain.repository.AuthRepository
 import com.peya.usersservice.domain.repository.UserRepository
 import org.hamcrest.Matchers.*
 import org.junit.Before
@@ -11,6 +12,7 @@ import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.servlet.MockMvc
@@ -31,6 +33,8 @@ class UserFunctionalTests {
     private lateinit var mockMvc: MockMvc
     @Autowired
     private lateinit var userRepository: UserRepository
+    @MockBean
+    private lateinit var authRepository: AuthRepository
 
     @Before
     fun clear() {
@@ -237,7 +241,7 @@ class UserFunctionalTests {
 
 
     private fun givenAnyActiveUser(): User {
-        val user = UserBuilder().withUserDto(UserDto(firstName = "Martin", email = "martin.bosch@gmail.com", lastName = "bosch", phone = "123")).build()
+        val user = UserBuilder().withUserDto(UserDto(firstName = "Martin", email = "martin.bosch@gmail.com", lastName = "bosch", phone = "123",password = "asd")).build()
         return userRepository.save(user)
     }
 }

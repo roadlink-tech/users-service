@@ -9,12 +9,14 @@ import javax.validation.constraints.Pattern
 data class UserDto(
         @field:NotNull @field:NotEmpty
         val firstName: String,
+        val password: String = "",
         @field:NotNull @field:NotEmpty
         val lastName: String,
         @field:NotNull @field:NotEmpty @field:Email
         val email: String,
         @field:NotNull @field:NotEmpty @field:Pattern(regexp = "\\d+")
         val phone: String
+
 ) {
     fun toUser(): User = User(firstName = firstName, lastName = lastName, email = email, phone = phone)
 
