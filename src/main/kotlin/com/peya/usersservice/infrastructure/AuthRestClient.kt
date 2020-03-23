@@ -11,7 +11,7 @@ class AuthRestClient : AuthRepository {
     override fun saveAuthRegistrationInfo(pwd: String, email: String, phone: String) {
         var client = RestTemplate()
         val headers = HttpHeaders()
-        val url = "localhost:8081/register"
+        val url = "localhost:8081/auth/register"
         val uri = URI(url)
         val body = AuthBody(userId = 1, password = pwd)
         headers.contentType = APPLICATION_JSON
