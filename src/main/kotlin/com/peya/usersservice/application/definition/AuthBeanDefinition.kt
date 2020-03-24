@@ -1,6 +1,6 @@
-package com.peya.usersservice.domain.definition
+package com.peya.usersservice.application.definition
 
-import com.peya.usersservice.domain.repository.AuthRepository
+import com.peya.usersservice.domain.auth.AuthRepository
 import com.peya.usersservice.infrastructure.AuthRestClient
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

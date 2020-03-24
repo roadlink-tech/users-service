@@ -1,7 +1,7 @@
 package com.peya.usersservice.application.exception
 
 import com.fasterxml.jackson.module.kotlin.MissingKotlinParameterException
-import com.peya.usersservice.domain.exception.UserNotFound
+import com.peya.usersservice.domain.user.UserNotFound
 import org.springframework.http.HttpStatus.BAD_REQUEST
 import org.springframework.http.HttpStatus.NOT_FOUND
 import org.springframework.http.ResponseEntity

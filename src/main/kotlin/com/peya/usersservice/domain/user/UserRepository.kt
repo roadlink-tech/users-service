@@ -1,6 +1,5 @@
-package com.peya.usersservice.domain.repository
+package com.peya.usersservice.domain.user
 
-import com.peya.usersservice.domain.entity.User
 import org.springframework.data.jpa.repository.Query
 import org.springframework.stereotype.Repository
 

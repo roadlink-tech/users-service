@@ -1,11 +1,9 @@
-package com.peya.usersservice.domain.entity
+package com.peya.usersservice.domain.user
 
-import com.peya.usersservice.domain.enums.UserStatus
-import com.peya.usersservice.domain.enums.UserStatus.DELETED
+import com.peya.usersservice.domain.user.UserStatus.DELETED
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
-import org.springframework.format.annotation.NumberFormat
 import java.time.LocalDateTime
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -16,8 +14,6 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType.IDENTITY
 import javax.persistence.Id
 import javax.persistence.Table
-import javax.validation.constraints.Email
-import javax.validation.constraints.Pattern
 
 @Entity
 @Table(name = "user")

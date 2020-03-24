@@ -1,6 +1,6 @@
 package com.peya.usersservice.infrastructure
 
-import com.peya.usersservice.domain.repository.AuthRepository
+import com.peya.usersservice.domain.auth.AuthRepository
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.web.client.RestTemplate

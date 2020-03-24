@@ -1,4 +1,4 @@
-package com.peya.usersservice.domain.enums
+package com.peya.usersservice.domain.user
 
 enum class UserStatus {
     ACTIVE,
