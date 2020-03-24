@@ -10,7 +10,7 @@ class EmailAddressPatternRule : UserEvaluationRule {
 
     override fun evaluate(toEvaluate: User) {
         if (!pattern.matcher(toEvaluate.email).matches()) {
-            throw RuntimeException("Invalid email format")
+            throw InvalidEmailAddressException("Invalid email format")
         }
     }
 }
