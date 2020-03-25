@@ -4,9 +4,11 @@ import com.peya.usersservice.application.dto.UserDto
 import com.peya.usersservice.domain.usecases.RegisterUser
 import com.peya.usersservice.domain.user.User
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
 const val registerUserControllerUrl = "/users"
@@ -19,6 +21,7 @@ class RegisterUserController {
     lateinit var action: RegisterUser
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     fun register(@RequestBody body: UserDto): User {
         return action.execute(body)
     }
