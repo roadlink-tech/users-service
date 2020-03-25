@@ -49,24 +49,18 @@
       <scope>runtime</scope>
     </dependency>
 
-    <!--
-<dependency>
-  <groupId>com.h2database</groupId>
-  <artifactId>h2</artifactId>
-  <scope>test</scope>
-  <version>1.4.194</version>
-</dependency>
-<dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-test</artifactId>
-  <scope>test</scope>
-</dependency>
-<dependency>
-  <groupId>org.jetbrains.kotlin</groupId>
-  <artifactId>kotlin-test-junit</artifactId>
-  <version>${kotlin.version}</version>
-</dependency>
- -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>test</scope>
+      <version>1.4.194</version>
+    </dependency>
 
     <!-- Junit 5 -->
     <dependency>

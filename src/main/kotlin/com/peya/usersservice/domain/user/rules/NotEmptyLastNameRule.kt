@@ -7,7 +7,7 @@ class NotEmptyLastNameRule : UserEvaluationRule {
 
     override fun evaluate(toEvaluate: User) {
         if (toEvaluate.lastName.isEmpty()) {
-            throw EmptyDataException("Last name must be not empty.")
+            throw EmptyDataException("Last name must not be empty.")
         }
 
     }
