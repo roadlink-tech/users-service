@@ -1,7 +1,7 @@
 package com.peya.usersservice.domain.user.rules
 
 import com.peya.usersservice.domain.user.User
-import java.lang.RuntimeException
+import com.peya.usersservice.domain.user.exception.InvalidEmailAddressException
 import java.util.regex.*
 
 class EmailAddressPatternRule : UserEvaluationRule {

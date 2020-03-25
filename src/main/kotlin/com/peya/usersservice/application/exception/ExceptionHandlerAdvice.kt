@@ -1,7 +1,7 @@
 package com.peya.usersservice.application.exception
 
 import com.fasterxml.jackson.module.kotlin.MissingKotlinParameterException
-import com.peya.usersservice.domain.user.UserNotFound
+import com.peya.usersservice.domain.user.exception.UserNotFoundException
 import org.springframework.http.HttpStatus.BAD_REQUEST
 import org.springframework.http.HttpStatus.NOT_FOUND
 import org.springframework.http.ResponseEntity
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 @ControllerAdvice
 class ExceptionHandlerAdvice {
 
-    @ExceptionHandler(UserNotFound::class)
-    fun handleUserNotFound(exception: UserNotFound) =
+    @ExceptionHandler(UserNotFoundException::class)
+    fun handleUserNotFound(exception: UserNotFoundException) =
         ResponseEntity.status(NOT_FOUND)
                 .body(ErrorResponse("USER_NOT_EXIST", listOf("User does not exist")))
 

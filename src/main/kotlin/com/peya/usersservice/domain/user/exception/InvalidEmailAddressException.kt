@@ -1,3 +1,3 @@
-package com.peya.usersservice.domain.user.rules
+package com.peya.usersservice.domain.user.exception
 
 class InvalidEmailAddressException(message: String): RuntimeException(message)
