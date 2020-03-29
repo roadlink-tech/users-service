@@ -1,6 +1,5 @@
 package com.peya.usersservice.application.controller
 
-import com.peya.usersservice.domain.auth.AuthRepository
 import com.peya.usersservice.domain.user.UserRepository
 import org.junit.Before
 import org.junit.Test
@@ -25,8 +24,6 @@ class RegisterUserControllerTest {
     private lateinit var mockMvc: MockMvc
     @Autowired
     private lateinit var userRepository: UserRepository
-    @MockBean
-    private lateinit var authRepository: AuthRepository
 
     @Before
     fun clear() {

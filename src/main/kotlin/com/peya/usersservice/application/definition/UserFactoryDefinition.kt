@@ -1,7 +1,9 @@
 package com.peya.usersservice.application.definition
 
 import com.peya.usersservice.domain.user.UserFactory
+import com.peya.usersservice.domain.user.UserRepository
 import com.peya.usersservice.domain.user.rules.EmailAddressPatternRule
+import com.peya.usersservice.domain.user.rules.EmailAlreadyInUseRule
 import com.peya.usersservice.domain.user.rules.NotEmptyFirstNameRule
 import com.peya.usersservice.domain.user.rules.NotEmptyLastNameRule
 import com.peya.usersservice.domain.user.rules.PhoneNumberPatternRule
@@ -12,11 +14,12 @@ import org.springframework.context.annotation.Configuration
 open class UserFactoryDefinition {
 
     @Bean
-    open fun userFactory(): UserFactory {
+    open fun userFactory(userRepository: UserRepository): UserFactory {
         return UserFactory(listOf(
                 EmailAddressPatternRule(),
                 NotEmptyFirstNameRule(),
                 NotEmptyLastNameRule(),
-                PhoneNumberPatternRule()))
+                PhoneNumberPatternRule(),
+                EmailAlreadyInUseRule(userRepository)))
     }
 }
