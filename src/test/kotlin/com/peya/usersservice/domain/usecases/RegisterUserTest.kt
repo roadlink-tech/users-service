@@ -1,7 +1,6 @@
 package com.peya.usersservice.domain.usecases
 
 import com.peya.usersservice.application.dto.UserDto
-import com.peya.usersservice.domain.auth.AuthRepository
 import com.peya.usersservice.domain.user.UserFactory
 import com.peya.usersservice.domain.user.UserRepository
 import com.peya.usersservice.domain.user.exception.InvalidEmailAddressException
@@ -20,8 +19,6 @@ class RegisterUserTest {
     private lateinit var userFactory: UserFactory
     @Mock
     private lateinit var userRepository: UserRepository
-    @Mock
-    private lateinit var authRepository: AuthRepository
 
     private lateinit var registerUser: RegisterUser
 
@@ -31,7 +28,7 @@ class RegisterUserTest {
     @BeforeEach
     internal fun setUp() {
         MockitoAnnotations.initMocks(this)
-        registerUser = RegisterUser(userFactory, userRepository, authRepository)
+        registerUser = RegisterUser(userFactory, userRepository)
     }
 
     @Test
@@ -45,7 +42,6 @@ class RegisterUserTest {
         //then
         userWasCreated()
         userWasSaved()
-        authRegistrationWasSaved()
     }
 
     @Test
@@ -75,7 +71,4 @@ class RegisterUserTest {
         verify(userRepository).save(userWithValidData.toUser())
     }
 
-    private fun authRegistrationWasSaved() {
-        verify(authRepository).saveAuthRegistrationInfo(anyString(), anyString(), anyString())
-    }
 }

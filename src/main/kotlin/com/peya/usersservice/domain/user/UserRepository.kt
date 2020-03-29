@@ -15,4 +15,7 @@ interface UserRepository : org.springframework.data.repository.Repository<User, 
     @Override
     fun deleteAll()
 
+    @Override
+    fun findByEmail(email: String): User?
+
 }

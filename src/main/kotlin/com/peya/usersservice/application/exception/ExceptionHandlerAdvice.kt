@@ -1,11 +1,13 @@
 package com.peya.usersservice.application.exception
 
+import com.peya.usersservice.domain.user.exception.EmailAlreadyInUseException
 import com.peya.usersservice.domain.user.exception.EmptyDataException
 import com.peya.usersservice.domain.user.exception.InvalidEmailAddressException
 import com.peya.usersservice.domain.user.exception.InvalidPhoneNumberException
 import com.peya.usersservice.domain.user.exception.UserNotFoundException
 import org.springframework.http.HttpStatus.BAD_REQUEST
 import org.springframework.http.HttpStatus.NOT_FOUND
+import org.springframework.http.HttpStatus.PRECONDITION_FAILED
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.FieldError
 import org.springframework.web.bind.MethodArgumentNotValidException
@@ -27,6 +29,16 @@ class ExceptionHandlerAdvice {
                         "MISSING_REQUIRED_FIELD",
                         listOf(exception.message!!)
                 ))
+    }
+
+    @ExceptionHandler(EmailAlreadyInUseException::class)
+    fun handleEmailAlreadyInUseException(exception: EmailAlreadyInUseException): ResponseEntity<ErrorResponse> {
+        return ResponseEntity.status(PRECONDITION_FAILED)
+                .body(ErrorResponse(
+                        "EMAIL_ALREADY_IN_USE",
+                        listOf(exception.message!!)
+                ))
+
     }
 
     @ExceptionHandler(InvalidEmailAddressException::class)
