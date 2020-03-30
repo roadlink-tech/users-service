@@ -6,8 +6,8 @@ import com.peya.usersservice.domain.user.rules.EmailAddressPatternRule
 import com.peya.usersservice.domain.user.rules.EmailUnusedRule
 import com.peya.usersservice.domain.user.rules.NotEmptyFirstNameRule
 import com.peya.usersservice.domain.user.rules.NotEmptyLastNameRule
-import com.peya.usersservice.domain.user.rules.PhoneUnusedRule
 import com.peya.usersservice.domain.user.rules.PhoneNumberPatternRule
+import com.peya.usersservice.domain.user.rules.PhoneUnusedRule
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 

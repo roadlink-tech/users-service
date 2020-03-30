@@ -2,14 +2,12 @@ package com.peya.usersservice.domain.usecases
 
 import com.peya.usersservice.application.dto.UserDto
 import com.peya.usersservice.domain.user.UserFactory
-import com.peya.usersservice.domain.user.UserRepository
 import com.peya.usersservice.domain.user.exception.InvalidEmailAddressException
+import com.peya.usersservice.domain.user.UserRepository
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations

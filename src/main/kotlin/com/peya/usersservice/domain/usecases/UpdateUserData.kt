@@ -13,6 +13,5 @@ class UpdateUserData(private val userRepository: UserRepository) {
         user.lastName = userDto.lastName
         user.email = userDto.email
         return userRepository.save(user)
-
     }
 }
