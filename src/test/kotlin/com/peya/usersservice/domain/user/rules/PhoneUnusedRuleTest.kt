@@ -17,7 +17,7 @@ class PhoneUnusedRuleTest {
     private lateinit var phoneUnusedRule: PhoneUnusedRule
 
     private val existingUserPhone = "+5491169004107"
-    private val existingUser = User(phone = existingUserPhone)
+    private val existingUser = User(id = 1L, phone = existingUserPhone)
     private val unusedUserPhone = "+5491159404201"
     private val newUser = User(phone = unusedUserPhone)
 
@@ -30,8 +30,12 @@ class PhoneUnusedRuleTest {
 
     @Test
     fun `when phone is already used by other user then should throw exception`() {
+        //given
+        val user = User(phone = existingUserPhone)
+        
+        //then
         assertThrows<PhoneAlreadyInUseException> {
-            phoneUnusedRule.evaluate(existingUser)
+            phoneUnusedRule.evaluate(user)
         }
     }
 

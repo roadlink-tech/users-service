@@ -17,6 +17,7 @@ class UserFactory(private val rules: List<UserEvaluationRule>) {
         user.firstName = Normalizer.removeWhiteSpaces(userDto.firstName)
         user.lastName = Normalizer.removeWhiteSpaces(userDto.lastName)
         user.email = userDto.email.toLowerCase()
+        user.phone = Normalizer.removeWhiteSpaces(userDto.phone)
         return user
     }
 

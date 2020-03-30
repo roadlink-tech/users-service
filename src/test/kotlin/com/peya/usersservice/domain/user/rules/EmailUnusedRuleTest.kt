@@ -17,10 +17,10 @@ class EmailUnusedRuleTest {
     private lateinit var userRepository: UserRepository
     private lateinit var emailUnusedRule: EmailUnusedRule
     private val existingUserEmail = "cabrerajjorge@gmail.com"
-    private val newEmail = "jorgejcabrera@hotmail.com.ar"
-    private val existingUser = User(email = existingUserEmail)
+    private val newUserEmail = "jorgejcabrera@hotmail.com.ar"
+    private val existingUser = User(id = 1L, email = existingUserEmail)
     private val userWithoutEmail = User()
-    private val newUser = User(email = newEmail)
+    private val newUser = User(email = newUserEmail)
 
     @BeforeEach
     fun setUp() {
@@ -30,9 +30,22 @@ class EmailUnusedRuleTest {
     }
 
     @Test
-    fun `when user already exist then should throw exception`() {
+    fun `when try to use an email already used by same user then should not throw exception`() {
+        //when
+        emailUnusedRule.evaluate(existingUser)
+
+        //then
+        noExceptionWasThrown()
+    }
+
+    @Test
+    fun `when already exists a user with expected email then should throw exception`() {
+        //given
+        val user = User(email = existingUserEmail)
+
+        //then
         assertThrows<EmailAlreadyInUseException> {
-            emailUnusedRule.evaluate(existingUser)
+            emailUnusedRule.evaluate(user)
         }
     }
 

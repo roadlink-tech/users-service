@@ -10,7 +10,9 @@ data class UserDto(
         val phone: String = ""
 
 ) {
-    fun toUser(): User = User(firstName = firstName, lastName = lastName, email = email, phone = phone)
+    fun toUser(): User {
+        return User(firstName = firstName, lastName = lastName, email = email, phone = phone)
+    }
 
     override fun toString(): String {
         return "UserDto(firstName='$firstName', lastName='$lastName', email='$email', phone='$phone')"

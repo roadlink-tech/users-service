@@ -25,7 +25,7 @@ class UserFactoryTest {
     @Mock
     private lateinit var userRepository: UserRepository
 
-    lateinit var factory: UserFactory
+    private lateinit var factory: UserFactory
     private val userWithInvalidName = UserDto(firstName = "", lastName = "cabrera", email = "cabrerajjorge@gmail.com", phone = "+5491154774264")
     private val userWithInvalidEmail = UserDto(firstName = "jorge", lastName = "cabrera", email = "cabrerajjorge", phone = "+5491154774264")
     private val userWithInvalidPhone = UserDto(firstName = "jorge", lastName = "cabrera", email = "cabrerajjorge@gmail.com", phone = "+")
@@ -33,7 +33,7 @@ class UserFactoryTest {
     private val userWithEmailAlreadyUsed = UserDto(firstName = "jorge", lastName = "cabreara", phone = "+5491169004107", email = "cabrerajjorge@gmail.com")
     private val expectedFirstNameNormalized = "jorge"
     private val expectedEmailNormalized = "cabrerajjorge@gmail.com"
-    private val existingUser = User(email = expectedEmailNormalized, phone = "+5491169004107")
+    private val existingUser = User(id = 1L, email = expectedEmailNormalized, phone = "+5491169004107")
 
 
     @BeforeEach
@@ -50,7 +50,7 @@ class UserFactoryTest {
     }
 
     @Test
-    fun `when try to create a user with an email already used then should throw exception`() {
+    fun `when try to create a user with an email already used by other user then should throw exception`() {
         assertThrows<EmailAlreadyInUseException> { factory.create(userWithEmailAlreadyUsed) }
     }
 
