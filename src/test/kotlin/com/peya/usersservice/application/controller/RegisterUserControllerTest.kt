@@ -30,7 +30,7 @@ class RegisterUserControllerTest {
     @Before
     fun clear() {
         userRepository.deleteAll()
-        userRepository.save(User(email = usedEmail))
+        userRepository.save(User(id = 1L, email = usedEmail))
     }
 
     @Test

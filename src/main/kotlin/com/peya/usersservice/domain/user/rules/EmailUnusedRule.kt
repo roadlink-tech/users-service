@@ -7,16 +7,24 @@ import com.peya.usersservice.domain.user.exception.EmailAlreadyInUseException
 class EmailUnusedRule(private val userRepository: UserRepository) : UserEvaluationRule {
 
     override fun evaluate(toEvaluate: User) {
-        if (hasEmail(toEvaluate) && userAlreadyExists(toEvaluate)) {
+        if (emailUsedByOtherUser(toEvaluate)) {
             throw EmailAlreadyInUseException("Email ${toEvaluate.email} is already taken by another account.")
         }
     }
 
-    private fun hasEmail(toEvaluate: User): Boolean {
-        return !toEvaluate.email.isBlank()
+    private fun emailUsedByOtherUser(user: User): Boolean {
+        if (hasEmail(user)) {
+            val existingUser = userRepository.findByEmail(user.email) ?: return false
+            return areDistinct(existingUser, user)
+        }
+        return false
     }
 
-    private fun userAlreadyExists(toEvaluate: User): Boolean {
-        return userRepository.findByEmail(toEvaluate.email) != null
+    private fun areDistinct(existingUser: User, user: User): Boolean {
+        return existingUser.id != user.id
+    }
+
+    private fun hasEmail(toEvaluate: User): Boolean {
+        return !toEvaluate.email.isBlank()
     }
 }

@@ -20,7 +20,7 @@ import javax.persistence.Table
 @EntityListeners(AuditingEntityListener::class)
 data class User(
         @Id @GeneratedValue(strategy = IDENTITY)
-        val id: Long = 0,
+        var id: Long = 0,
         var firstName: String = "",
         var lastName: String = "",
         var email: String = "",
