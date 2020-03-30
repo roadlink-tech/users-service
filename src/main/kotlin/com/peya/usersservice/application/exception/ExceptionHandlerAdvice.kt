@@ -4,6 +4,7 @@ import com.peya.usersservice.domain.user.exception.EmailAlreadyInUseException
 import com.peya.usersservice.domain.user.exception.EmptyDataException
 import com.peya.usersservice.domain.user.exception.InvalidEmailAddressException
 import com.peya.usersservice.domain.user.exception.InvalidPhoneNumberException
+import com.peya.usersservice.domain.user.exception.PhoneAlreadyInUseException
 import com.peya.usersservice.domain.user.exception.UserNotFoundException
 import org.springframework.http.HttpStatus.BAD_REQUEST
 import org.springframework.http.HttpStatus.NOT_FOUND
@@ -35,10 +36,18 @@ class ExceptionHandlerAdvice {
     fun handleEmailAlreadyInUseException(exception: EmailAlreadyInUseException): ResponseEntity<ErrorResponse> {
         return ResponseEntity.status(PRECONDITION_FAILED)
                 .body(ErrorResponse(
-                        "EMAIL_ALREADY_IN_USE",
-                        listOf(exception.message!!)
+                        "INVALID_EMAIL",
+                        listOf("Invalid email")
                 ))
+    }
 
+    @ExceptionHandler(PhoneAlreadyInUseException::class)
+    fun handlePhoneAlreadyInUseException(exception: EmailAlreadyInUseException): ResponseEntity<ErrorResponse> {
+        return ResponseEntity.status(PRECONDITION_FAILED)
+                .body(ErrorResponse(
+                        "INVALID_EMAIL",
+                        listOf("Invalid phone")
+                ))
     }
 
     @ExceptionHandler(InvalidEmailAddressException::class)

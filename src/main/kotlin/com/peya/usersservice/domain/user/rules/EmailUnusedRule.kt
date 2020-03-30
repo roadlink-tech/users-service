@@ -4,7 +4,7 @@ import com.peya.usersservice.domain.user.User
 import com.peya.usersservice.domain.user.UserRepository
 import com.peya.usersservice.domain.user.exception.EmailAlreadyInUseException
 
-class EmailAlreadyInUseRule(private val userRepository: UserRepository) : UserEvaluationRule {
+class EmailUnusedRule(private val userRepository: UserRepository) : UserEvaluationRule {
 
     override fun evaluate(toEvaluate: User) {
         if (hasEmail(toEvaluate) && userAlreadyExists(toEvaluate)) {
