@@ -1,5 +1,6 @@
 package com.peya.usersservice.application.controller
 
+import com.peya.usersservice.domain.user.User
 import com.peya.usersservice.domain.user.UserRepository
 import org.junit.Before
 import org.junit.Test
@@ -7,7 +8,6 @@ import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.servlet.MockMvc
@@ -25,9 +25,20 @@ class RegisterUserControllerTest {
     @Autowired
     private lateinit var userRepository: UserRepository
 
+    private val usedEmail = "cabrerajjorge@gmail.com"
+
     @Before
     fun clear() {
         userRepository.deleteAll()
+        userRepository.save(User(email = usedEmail))
+    }
+
+    @Test
+    fun `when create user with an email already used then should throw 409`() {
+        mockMvc.perform(post("/users")
+                .content("""{ "first_name":"foo", "last_name":"cabrera", "email":"$usedEmail", "phone":"+5491169004107" }""".trimMargin())
+                .contentType(APPLICATION_JSON))
+                .andExpect(status().isPreconditionFailed)
     }
 
     @Test

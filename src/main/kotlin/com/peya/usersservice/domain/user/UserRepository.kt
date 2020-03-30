@@ -18,4 +18,7 @@ interface UserRepository : org.springframework.data.repository.Repository<User, 
     @Override
     fun findByEmail(email: String): User?
 
+    @Override
+    fun findByPhone(phone: String): User?
+
 }
