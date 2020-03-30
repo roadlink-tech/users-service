@@ -42,7 +42,7 @@ class ExceptionHandlerAdvice {
     }
 
     @ExceptionHandler(PhoneAlreadyInUseException::class)
-    fun handlePhoneAlreadyInUseException(exception: EmailAlreadyInUseException): ResponseEntity<ErrorResponse> {
+    fun handlePhoneAlreadyInUseException(exception: PhoneAlreadyInUseException): ResponseEntity<ErrorResponse> {
         return ResponseEntity.status(PRECONDITION_FAILED)
                 .body(ErrorResponse(
                         "INVALID_EMAIL",
